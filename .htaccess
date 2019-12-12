@@ -1,0 +1,118 @@
+php_flag magic_quotes_gpc Off
+AddDefaultCharset utf-8
+DirectoryIndex index.php
+DirectorySlash off
+
+
+RewriteEngine On
+   #  Директива включает редиректы.
+RewriteBase /
+   # Без директивы (.*) = /$1 будет /var/wwww/site/web/$1  с директивой  = /$1
+Options +FollowSymLinks
+   # Разрешает переход по символическим ссылкам.
+#php_flag display_errors off
+  # запретить отображение ошибок  (требование монитора качества)
+php_flag allow_url_fopen off
+  # запретить  использовать удаленные файлы (требование проактивной защиты)
+
+#php_value max_execution_time 500
+#php_value max_input_time 500
+php_value upload_max_filesize 30M
+php_value post_max_size 30M
+
+
+############################################################################
+#### Убираем повторяющиеся слеши (/) в URL                              ####
+############################################################################
+RewriteCond %{THE_REQUEST} //
+   # Проверяем, повторяется ли слеш (//) более двух раз.
+RewriteCond %{QUERY_STRING} !http(s|)://
+  # Убедимся что это не урл в  GET
+RewriteRule .* /$0 [R=301,L]
+   # Исключаем все лишние слеши.
+
+############################################################################
+#RewriteCond %{REQUEST_URI} \..+$
+   # Если файл содержит точку.
+#RewriteCond %{REQUEST_FILENAME} !-d
+   # И это не директория.
+#RewriteCond %{REQUEST_FILENAME} -f
+   # Является файлом.
+RewriteCond %{REQUEST_URI} ^(.+)/$
+   # И в конце URL есть слеш.
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+   # Исключить слеш.
+
+#RewriteRule ^favicon\.ico$  favicon.php?path=$1&%{QUERY_STRING} [L]
+
+##########################################
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !favicon.ico
+#RewriteCond %{REQUEST_URI} !^public
+#RewriteCond %{REQUEST_URI} !^public
+#RewriteCond %{REQUEST_URI} !\.(css|js|jpg|jpeg|gif|png|zip|rar|doc|xls|js|tif|tiff|woff|ttf|docx|xlsx|ico)[0-9]*\??.*$
+#RewriteCond %{REQUEST_URI} !\.((css|js|jpg|jpeg|gif|png|zip|rar|doc|xls|js|tif|tiff|woff|ttf|docx|xlsx|ico)([0-9]*\?[0-9a-z.=]*)?)$
+#RewriteCond %{REQUEST_URI} !.*\.(css|js|jpg|jpeg|gif|png|zip|rar|doc|xls|js|tif|tiff|woff|ttf|docx|xlsx|ico)[0-9]*(\?[0-9a-z.=]*)?
+RewriteCond %{REQUEST_URI} !=/favicon.ico
+RewriteCond %{REQUEST_URI} !^/public/?
+RewriteRule ^(.*) index.php [L]
+
+
+#ErrorDocument 403 /403.html
+#ErrorDocument 404 /404.html
+
+
+#<IfModule mod_deflate.c>
+#  AddType image/svg+xml .svg
+#  AddOutputFilterByType DEFLATE image/svg+xml
+#  AddOutputFilterByType DEFLATE application/rss+xml
+#  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+#  AddOutputFilterByType DEFLATE application/x-font
+#  AddOutputFilterByType DEFLATE application/x-font-opentype
+#  AddOutputFilterByType DEFLATE application/x-font-otf
+#  AddOutputFilterByType DEFLATE application/x-font-truetype
+#  AddOutputFilterByType DEFLATE application/x-font-ttf
+#  AddOutputFilterByType DEFLATE application/x-javascript
+#  AddOutputFilterByType DEFLATE application/xhtml+xml
+#  AddOutputFilterByType DEFLATE application/xml
+#  AddOutputFilterByType DEFLATE font/opentype
+#  AddOutputFilterByType DEFLATE font/otf
+#  AddOutputFilterByType DEFLATE font/ttf
+#  AddOutputFilterByType DEFLATE image/svg+xml
+#  AddOutputFilterByType DEFLATE image/x-icon
+#  AddOutputFilterByType DEFLATE text/css
+#  AddOutputFilterByType DEFLATE text/html
+#  AddOutputFilterByType DEFLATE text/javascript
+#  AddOutputFilterByType DEFLATE text/plain
+#  AddOutputFilterByType DEFLATE text/xml
+#  AddOutputFilterByType DEFLATE image/svg+xml
+#</IfModule>
+#<IfModule mod_expires.c>
+#  ExpiresActive on
+#  ExpiresByType image/jpeg "access plus 1 year"
+#  ExpiresByType image/svg "access plus 1 year"
+#  ExpiresByType image/gif "access plus 1 year"
+#  ExpiresByType image/png "access plus 1 year"
+#  ExpiresByType text/javascript "access plus 1 year"
+#  ExpiresByType text/css "access plus 1 year"
+#  ExpiresByType application/javascript "access plus 1 year"
+#  ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+#  ExpiresByType application/x-font-ttf "access plus 1 year"
+#  ExpiresByType application/x-font-opentype "access plus 1 year"
+#  ExpiresByType application/x-font-woff "access plus 1 year"
+#  ExpiresByType image/svg+xml "access plus 1 year"
+#</IfModule>
+#  <IfModule mod_headers.c>
+#  <filesmatch "\.(ico|flv|jpg|jpeg|webp|png|gif|css|swf)$">
+#  	Header set Cache-Control "max-age=31536000, public"
+#  </filesmatch>
+#  <filesmatch "\.(html|htm)$">
+#  	Header set Cache-Control "max-age=7200, private, must-revalidate"
+#  </filesmatch>
+#  <filesmatch "\.(pdf)$">
+#  	Header set Cache-Control "max-age=86400, public"
+#  </filesmatch>
+#  <filesmatch "\.(js|otf|ttf|woff|woff2)$">
+#  	Header set Cache-Control "max-age=31536000, private"
+#  </filesmatch>
+#  </IfModule>

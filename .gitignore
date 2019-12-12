@@ -1,0 +1,16 @@
+/.idea
+/TEST
+/vendor
+/views/TEMPLATE*
+/public
+/database/BAC
+/database/new
+storage/*
+config.php
+links.txt
+php*
+.phpstorm.meta.php
+_ide_helper.php
+test*
+
+

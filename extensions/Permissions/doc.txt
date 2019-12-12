@@ -1,0 +1,51 @@
+
+Добавить в модель пользователей: use Extensions\Permissions\HasRoles;
+
+////// USER ///////////////
+$user->can(string $permission) - У этого пользователя есть разрешение $permission ?
+$user->hasAnyPermission(...$permissions) - Есть у пользователя какое либо из разрешений $permissions
+$user->hasAllPermissions(...$permissions) - У пользователя есть все $permissions разрешения
+$user->getAllPermissions() - Все разрешения этого пользователя тоже самое, что и $user->permissions()
+$user->getPermissionNames() - получить список всех разрешений, непосредственно назначенных пользователю
+
+$user->getRoleNames() - получить имена ролей пользователя
+$user->hasRole($roles): bool - Есть роль $role у этого пользователя?
+$user->hasAnyRole($roles): bool - есть ли у пользователя какой-либо из заданных списков ролей
+$user->hasAllRoles($roles) - У этого пользователя есть все роли $roles!
+$user->getAllRoles() - У этого пользователя есть все роли $roles!
+$user->giveRole(string $role) - Дать роль $role этому пользователю
+$user->giveRoles($roles) - Добавить роли $roles этому пользователю
+$user->revokeRole(string $role) - Отзывает роль $role у пользователя
+$user->revokeRoles($roles) - Отзывает роли у пользователя
+$user->syncRoles($roles) - Синхронизирует роли $roles. Удаляет все и присваивает $roles
+$user->roles() - Роли этого пользователя
+
+////// ROLES ///////////////
+
+Role::createRole(array $role) -
+Role::dropRole($role) - Удаляет роль по имени и связи с разрешениями (разрешения не трогает)
+$role->getPermissionsByIdRole($id) - Возвращает разрешения по id роли
+$role->getPermissionsByNameRole($name) - Возвращает разрешения по имени роли
+$role->givePermissionTo($perms) - Назначить этой роли разрешения $perms если разрешения $perms существуют
+$role->revokePermissionTo(string $perm) - Отвязывает разрешение $perm от этой роли
+$role->syncPermissions(array $perms) - Синхронизирует роль с разрешениями $perms удалит все разрешения этой роли и назначит $perms разрешения если разрешения существуют
+Role::hasRole($role) - Существует ли вообще такая роль?
+$role->hasPermissionTo($perm) - У этой роли есть разрешение $perm ?
+$role->permissions()
+
+////// PERMISSIONS ///////////////
+
+Permission::createPermission(array $perm)
+Permission::dropPermission($perm) - Удаляет разрешение по имени и связи с ролями (роли не трогает)
+Permission::dropIds(array $ids) - Удаляет разрешения по id
+Permission::giveRoleTo(string $role) - Это разрешение добавить к роли $role если роль существует
+Permission::revokeRoleTo(string $role) - Это разрешение удаляет связь с ролью $role
+Permission::syncRoles(array $roles) - Это разрешение добавляется к ролям $roles
+Permission::getPermissionById($id) -
+Permission::getPermissionByName(string $name) -
+Permission::allPermissions() -
+Permission::has($perm) - Существует ли вообще такое разрешение?
+Permission::roles() -
+
+
+

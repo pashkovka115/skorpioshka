@@ -1,0 +1,38 @@
+{
+    "name": "sergey/stack-developers.loc",
+    "authors": [
+        {
+            "name": "Sergey Smirnov",
+            "email": "pariss8@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/",
+            "Modules\\": "modules/",
+            "Widgets\\": "widgets/",
+            "Extensions\\": "extensions/"
+        },
+        "files": [
+            "core/Helpers/functions.php",
+            "core/Settings/system.php",
+            "config.php"
+        ]
+    },
+    "require": {
+        "illuminate/database": "^5.8",
+        "phpmailer/phpmailer": "^6.0",
+        "league/oauth2-google": "^3.0",
+        "hayageek/oauth2-yahoo": "^2.0",
+        "stevenmaguire/oauth2-microsoft": "^2.2",
+        "psr/log": "^1.1",
+        "vlucas/valitron": "^1.4"
+    },
+    "scripts": {
+        "serve": "php -S localhost:8000"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "4.*",
+        "fzaninotto/faker": "^1.8"
+    }
+}

@@ -1,0 +1,74 @@
+
+ * $v = new Validator([
+        'password' => 'sergey',
+        'confirmed' => 'sergey',
+        'field1' => 'value',
+        'field2' => 'value',
+        'field' => 'vvv',
+        'field-length' => 'ivanov',
+        't_max_int' => '6',
+        't_min_int' => 6,
+        'field_ip'=>'127.0.0.1',
+        'email'=>'111xsvds@mail.ru',
+        'field_url'=>'https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Regular_Expressions',
+        'field_url_active'=>'https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Regular_Expressions',
+        'field_credit_card' => '453 9804 05654 190 4',
+]);
+
+ * $v->rule('rule', ['field[:2]']);
+ * $v->rule('regex', ['field_name:#[a-z]+#']);
+ * $v->rules(['regex' => ['field_name:#[a-z]+#']]);
+ * $v->rules([
+            'length' => ['password:6', 'confirmed:6'],
+            'equals' => ['password:confirmed', 'field1:field2'],
+            'min_length' => ['field:2'],
+            'max_length' => ['field-length:7'],
+            'max_int' => ['t_max_int:6'],
+            'min_int' => ['t_min_int:6'],
+            'ip' => ['field_ip'],
+            'email'=>['email'],
+            'url'=>['field_url'],
+            'url_active'=>['field_url_active'],
+            'credit_card'=>['field_credit_card']
+]);
+
+ * $v->validate();
+ * $v->getErrors();
+
+ ////////////////////// RULES /////////////
+
+ auth - зарегестрирован? 'auth' => ['email:password']
+ not_auth - Не зарегестрирован? 'not_auth' => ['email']
+ unique - уникальное значение в таблице БД
+ equals - значения этх полей одинаково
+ different - Убедитесь, что поле отличается от другого поля
+ confirmed - Проверить, что поле было «принято»
+ length - Длинна строки
+ min_length - Минимальная длина строки
+ max_length - Максимальная длина строки
+ max_int - Максимальное число
+ min_int - Минимальное число
+ ip - Убедитесь, что поле является действительным IP-адресом
+ ipv4 - Убедитесь, что поле является действительным IPv4-адресом
+ ipv6 - Убедитесь, что поле является действительным IPv6-адресом
+ ascii - Убедитесь, что поле содержит только символы ASCII
+ utf8 - Убедитесь, что поле содержит только символы UTF-8
+ email - Убедитесь, что поле является валидным адресом электронной почты
+ emailDNS - Убедитесь, что поле является валидным адресом электронной почты и имя домена активно
+ url - Проверить, что поле является допустимым URL-адресом по синтаксису
+ url_active - Проверьте, что поле является активным URL, проверив запись DNS
+ slug - Убедитесь, что поле содержит только буквенно-цифровые символы, тире и подчеркивания
+ regex - Проверьте, что поле проходит проверку регулярным выражением
+ credit_card - Проверить, что поле содержит число, похожее на номер кредитной карты
+ float
+ array
+ bool
+ required - Поле обязательно к заполнению
+ alnum - Строка содержащая цифры и/или латинские буквы
+ alpha - должно содержать только латинские символы
+ numeric - должно быть цыфрами или строкой содержащей цыфры
+ cntrl - Проверяет, все ли символы в переданной строке являются управляющими символами
+ digit - должно быть строкой содержащей цыфры
+ print - Проверяет, все ли символы в переданной строке являются печатными.
+ xdigit - Проверяет, являются ли все символы в строке шестнадцатеричными цифрами
+

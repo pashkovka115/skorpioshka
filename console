@@ -1,0 +1,39 @@
+<?php
+use Illuminate\Container\Container;
+
+define('ACCESS',true);
+require 'vendor/autoload.php';
+//require 'core/Settings/system.php';
+//require 'config.php';
+//require 'core/Helpers/functions.php';
+// ожидает ввод от пользователя
+//$line = trim(fgets(STDIN, 1024));
+array_shift($argv);
+$cnt = $argc -1;
+
+
+if (count($argv) == 0 or in_array('help', $argv) or in_array('list', $argv) or in_array('--help', $argv) or in_array('-h', $argv)){
+    $help = new \Core\Console\Help();
+    $help->help();
+}elseif (count($argv) > 0){
+    new \Core\Console\Router($argv, $cnt);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
